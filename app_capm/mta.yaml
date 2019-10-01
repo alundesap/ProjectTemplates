@@ -1,6 +1,6 @@
 ID: #{proj_name}
 _schema-version: "2.1"
-description: #{author}'s Cloud Application Programming Model Template
+description: #{author}'s Application
 version: 0.0.1
 modules:
   - name: #{proj_name}-db
