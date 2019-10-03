@@ -1,0 +1,41 @@
+ID: app_mta
+_schema-version: '2.1'
+description: Multi-Target Application Template
+version: 0.0.1
+
+modules:
+ - name: web
+   type: html5
+   path: web
+   parameters:
+      disk-quota: 256M
+      memory: 256M
+   build-parameters:
+      builder: grunt
+   requires:
+    - name: uaa_app_mta
+    - name: dest_app_mta
+
+
+ - name: util
+   type: nodejs
+   path: util
+   provides:
+    - name: util_api
+      properties:
+         url: ${default-url}
+
+resources:
+ - name: uaa_app_mta
+   parameters:
+      path: ./xs-security.json
+      service-plan: application
+      service: xsuaa
+   type: org.cloudfoundry.managed-service
+
+ - name: dest_app_mta
+   parameters:
+      service-plan: lite
+      service: destination
+   type: org.cloudfoundry.managed-service
+
