@@ -4,9 +4,6 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta http-equiv='Content-Type' content='text/html;charset=UTF-8' />
 <title>web</title>
-<script id="Cookiebot" src="https://consent.cookiebot.com/uc.js" data-cbid="23874da6-e198-4dc5-8909-594859d74c1d" type="text/javascript" async></script>
-<!--  /* https://github.com/js-cookie/js-cookie */ --> 
-<script src="/inc/jscookie.js"></script>
 <script type="text/javascript">
 function guid() {
     function _p8(s) {
@@ -18,24 +15,6 @@ function guid() {
 // console.log(guid());  
 </script>
 <script type="text/javascript">
-function doOnLoad() {
-	var uu = Cookies.get('ConcileTimeUU');	
-	if (uu) {
-		var expires = "null";
-		console.log("ConcileTimeUU Cookie: " + uu + " expires: " + expires);
-		sendVisit(uu, expires);
-	}
-	else {
-		console.log("No ConcileTimeUU Cookie");
-		uu = Cookies.set('ConcileTimeUU', guid(), { expires: 365 });
-		console.log("ConcileTimeUU Cookie: " + uu);
-		var parts = uu.split(";")
-		var expires = (parts[2]).split("=")[1];
-		uu = (parts[0]).split("=")[1];
-		console.log("ConcileTimeUU Cookie: " + uu + " expires: " + expires);
-		sendVisit(uu, expires);
-	}
-}
 
 var xhr = new XMLHttpRequest();
 
@@ -54,63 +33,16 @@ var request_obj =
 	"expiresOn": "",
 	"createdAt": ""
 };
-
-function sendVisit(uu, expires)
-{
-
-	//     "expiresOn": "Sat, 08 Aug 2020 22:01:20 GMT",
-	//     "createdAt": "2019-08-09T22:02:33Z"
-
-    	// var d = new Date(Date.parse('Sat, 08 Aug 2020 22:01:20 GMT'));
-
-		var d = {};
-		var dISO = "";
-		
-		if (expires != "null") {
-			d = new Date(Date.parse(expires));
-			dISO = d.toISOString();
-		}
-		else {
-			dISO = null;
-		}
-	
-		request_obj = 
-		{
-			"ID": guid(),
-			"uuguid": uu,
-			"expiresOn": dISO
-	   	};
-	
-		xhr = new XMLHttpRequest();
-		xhr.open('POST', 'catalog/Visits');
-		xhr.setRequestHeader('Content-Type', 'application/json');
-		xhr.setRequestHeader('Accept', 'application/json');
-
-		xhr.onload = function() {
-		    if (xhr.status === 201) {
-		        document.getElementById("response_content").innerHTML = "<pre>\n" + dumpResponseHeaders(xhr) + "Response Body: \n" + JSON.stringify(JSON.parse(xhr.responseText), null, 2) + "</pre>\n";
-		    }
-		    else {
-		        alert("Yipe!  Got status " + xhr.status + " : " + xhr.statusText + " ::\n " + JSON.parse(xhr.responseText).error.message.value + " \n:: expected 201.");
-		    }
-		};
-
-		xhr.send(JSON.stringify(request_obj));
-
-}
-
 </script>
 </head>
-<body style="font-family: Tahoma, Geneva, sans-serif" onload="doOnLoad()">
-<strong><a href="https://www.conciletime.com">ConcileTime</a></strong><br />
+<body style="font-family: Tahoma, Geneva, sans-serif">
+<strong><a href="/">ConcileTime</a></strong><br />
 <br />
 <!-- <a href="https://hanaexpress-sap-di-local-npm-registry.us.sap-a-team.com/%40sap%2Fxsenv">Query Local NPM Registry</a><br /> -->
 <a href="/catalog/Visits?$top=5&$orderby=createdAt%20desc">Last 5 Visits</a> via ODATA(noauth)<br />
 <a href="catalog/">ODATA Catalog</a> Provided by the srv module.<br />
 <a href="catalog/$metadata">catalog/$metadata</a> Provided by the srv module, Metadata.<br />
 <a href=https://conciletime.conciletime.com/catalog/$metadata>catalog/$metadata</a> Provided by the srv module, Metadata.(conciletime.com)<br />
-<iframe width="800" height="940" src="https://qtrial2019q2az1.az1.qualtrics.com/jfe/form/SV_3WTHBnmyjnxXHgN" frameborder="0" allowfullscreen></iframe>
-<script id="CookieDeclaration" src="https://consent.cookiebot.com/23874da6-e198-4dc5-8909-594859d74c1d/cd.js" type="text/javascript" async></script>
 <div id="response_content">
 No results returned yet.    
 </div>
