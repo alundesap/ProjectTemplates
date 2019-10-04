@@ -11,10 +11,10 @@ modules:
       app-name: #{proj_name_lc}-utl
       memory: 512M
       disk-quota: 256M
-      host: #{proj_name_lc}-utl-${space}
+      #host: #{proj_name_lc}-utl-${space}
       #host: utility-${space} #The registry-config-${space}.json specifies this hostname uniquely
       #host: utility
-      domain: #{domain_name}
+      #domain: #{domain_name}
    provides:
     - name: util_api
       properties:
@@ -22,17 +22,14 @@ modules:
    requires:
     - name: #{proj_name_lc}-uaa
 
-
  - name: #{proj_name_lc}-web
    type: html5
    path: web
    parameters:
       memory: 512M
       disk-quota: 256M
-      host: #{proj_name_lc}-${space}
-      domain: #{domain_name}
-   build-parameters:
-      builder: grunt
+      #host: #{proj_name_lc}-${space}
+      #domain: #{domain_name}
    requires:
     - name: #{proj_name_lc}-uaa
     - name: util_api
