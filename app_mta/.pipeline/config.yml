@@ -1,10 +1,10 @@
 # https://sap.github.io/jenkins-library/
 general:
-  gitSshKeyCredentialsId: 'GITHUBALUNDESAP'
+  gitSshKeyCredentialsId: '#{jenkins_git_creds}'
   collectTelemetryData: false
 steps:
   setupCommonPipelineEnvironment:
-    collectTelemetryData: true
+    collectTelemetryData: false
   mtaBuild:
     buildTarget: 'CF'
     defaultNpmRegistry: 'https://registry.npmjs.org/'
@@ -12,10 +12,10 @@ steps:
     deployTool: 'mtaDeployPlugin'
     deployType: 'standard'
     cloudFoundry:
-      apiEndpoint: 'https://api.cf.us10.hana.ondemand.com'
-      org: 'ConcileTime'
-      space: 'dev'
-      credentialsId: 'CF_CREDENTIALSID'
+      apiEndpoint: 'https://api.cf.#{jenkins_cf_region}.hana.ondemand.com'
+      org: '#{jenkins_cf_org}'
+      space: '#{jenkins_cf_space}'
+      credentialsId: '#{jenkins_cf_creds}'
       dockerImage: 's4sdk/docker-cf-cli'
       dockerWorkspace: '/home/jenkins/piper'
     mtaDeployParameters: '-f -e mta_to_cf.mtaext'

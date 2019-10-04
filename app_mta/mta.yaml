@@ -46,7 +46,7 @@ resources:
  - name: #{proj_name_lc}-uaa
    parameters:
       path: ./xs-security.json
-      service-name: #{project_name_uc}_UAA
+      service-name: #{proj_name_uc}_UAA
       service-plan: application
       service: xsuaa
       config:

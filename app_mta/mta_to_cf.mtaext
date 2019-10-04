@@ -1,0 +1,25 @@
+_schema-version: '3.1'
+ID: #{proj_name_lc}-mtaex
+extends: #{proj_name_lc}
+
+modules:
+ - name: #{proj_name_lc}-utl
+   parameters:
+     app-name: #{proj_name_lc}_utl
+     
+ - name: #{proj_name_lc}-web
+   parameters:
+     app-name: #{proj_name_lc}_web
+     
+resources:
+ - name: #{proj_name_lc}-uaa
+   parameters:
+     path: xs-security.json
+     service-name: #{proj_name_uc}_UAA
+     service-plan: application
+     service: xsuaa
+     shared: true
+     config:
+       xsappname: #{proj_name_lc}
+       tenant-mode: shared
+
