@@ -1,41 +1,56 @@
-ID: app_mta
+ID: #{proj_name_lc}
 _schema-version: '2.1'
-description: Multi-Target Application Template
+description: #{proj_comment}
 version: 0.0.1
 
 modules:
- - name: web
-   type: html5
-   path: web
-   parameters:
-      disk-quota: 256M
-      memory: 256M
-   build-parameters:
-      builder: grunt
-   requires:
-    - name: uaa_app_mta
-    - name: dest_app_mta
-
-
- - name: util
+ - name: #{proj_name_lc}-utl
    type: nodejs
    path: util
+   parameters:
+      app-name: #{proj_name_lc}-utl
+      memory: 512M
+      disk-quota: 256M
+      host: #{proj_name_lc}-utl-${space}
+      #host: utility-${space} #The registry-config-${space}.json specifies this hostname uniquely
+      #host: utility
+      domain: #{domain_name}
    provides:
     - name: util_api
       properties:
          url: ${default-url}
+   requires:
+    - name: #{proj_name_lc}-uaa
+
+
+ - name: #{proj_name_lc}-web
+   type: html5
+   path: web
+   parameters:
+      memory: 512M
+      disk-quota: 256M
+      host: #{proj_name_lc}-${space}
+      domain: #{domain_name}
+   build-parameters:
+      builder: grunt
+   requires:
+    - name: #{proj_name_lc}-uaa
+    - name: util_api
+      group: destinations
+      properties:
+         name: util_be
+         url: ~{url}
+         forwardAuthToken: true
 
 resources:
- - name: uaa_app_mta
+ - name: #{proj_name_lc}-uaa
    parameters:
       path: ./xs-security.json
+      service-name: #{project_name_uc}_UAA
       service-plan: application
       service: xsuaa
-   type: org.cloudfoundry.managed-service
-
- - name: dest_app_mta
-   parameters:
-      service-plan: lite
-      service: destination
+      config:
+         xsappname: #{proj_name_lc}
+         tenant-mode: dedicated
    type: org.cloudfoundry.managed-service
 

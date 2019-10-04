@@ -1,7 +1,7 @@
 {
-	"xsappname": "conciletime",
+	"xsappname": "#{proj_name_lc}",
 	"tenant-mode": "shared",
-	"description": "Business App that helps to (re)Concile Time.",
+	"description": "#{proj_comment}",
 	"scopes": [
 		{
 			"name": "$XSAPPNAME.Callback",
@@ -22,7 +22,7 @@
 	],
 	"role-templates":[
 		{
-			"name": "ConcileTimeManager", 
+			"name": "#{proj_name_mc}Admin", 
 			"description": "Role for creating and viewing data",
 			"scope-references": [ 
 				"$XSAPPNAME.create",
@@ -30,7 +30,7 @@
 			]
 		},
 		{
-			"name": "ConcileTimeMultiUser",
+			"name": "#{proj_name_mc}User", 
 			"description": "Role for viewing data only",
 			"scope-references":  [ 
 				"$XSAPPNAME.view" 
@@ -40,7 +40,7 @@
 	"oauth2-configuration": {   
 		"redirect-uris":
 		[
-			"http*://*.conciletime.com/**"
+			"http*://*.#{domain_name}/**"
 		]   
 	}
 }

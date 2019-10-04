@@ -1,17 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>conciletime</name>
-	<comment>CAP ConcileTime Data App</comment>
+	<name>#{proj_name_lc}</name>
+	<comment>#{proj_comment}</comment>
 	<projects>
 	</projects>
 	<buildSpec>
-		<buildCommand>
-			<name>org.eclipse.xtext.ui.shared.xtextBuilder</name>
-			<arguments>
-			</arguments>
-		</buildCommand>
 	</buildSpec>
-	<natures>
-		<nature>org.eclipse.xtext.ui.shared.xtextNature</nature>
-	</natures>
 </projectDescription>
